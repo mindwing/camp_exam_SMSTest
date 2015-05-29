@@ -50,15 +50,13 @@ public class SmsUtil {
 		return msgs;
 	}
 
+	private static final String smsFormat = "[발신자번호]\t%s\n[발신일자]\t\t\t%s\n[SMS본문]\t\t%s";
+
 	public static CharSequence makeOneString(SmsMessage smsMessage) {
-		String retVal = "[발신자번호] ";
-		retVal += smsMessage.getOriginatingAddress();
-		retVal += "\n";
-		retVal += "[발신일자] ";
-		retVal += dateFormat.format(new Date(smsMessage.getTimestampMillis()));
-		retVal += "\n";
-		retVal += "[SMS본문] ";
-		retVal += smsMessage.getDisplayMessageBody();
+		String retVal = String.format(smsFormat,
+				smsMessage.getOriginatingAddress(),
+				dateFormat.format(new Date(smsMessage.getTimestampMillis())),
+				smsMessage.getDisplayMessageBody());
 
 		return retVal;
 	}

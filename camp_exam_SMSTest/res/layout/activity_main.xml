@@ -30,7 +30,8 @@
         android:layout_below="@id/send_text"
         android:layout_margin="5dp"
         android:layout_toLeftOf="@+id/send_button"
-        android:background="#dedede" />
+        android:background="#dedede"
+        android:inputType="phone" />
 
     <Button
         android:id="@id/send_button"

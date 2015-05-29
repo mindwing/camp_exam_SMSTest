@@ -8,9 +8,56 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="kr.mindwing.camp_exam_smstest.MainActivity" >
 
-    <TextView
+    <EditText
+        android:id="@+id/send_text"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:background="#dedede"
+        android:inputType="textMultiLine" >
+
+        <requestFocus android:layout_width="wrap_content" />
+    </EditText>
+
+    <EditText
+        android:id="@+id/send_phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/send_text"
+        android:layout_margin="5dp"
+        android:layout_toLeftOf="@+id/send_button"
+        android:background="#dedede" />
+
+    <Button
+        android:id="@id/send_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignBottom="@id/send_phonenumber"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/send_text"
+        android:text="보내기" />
+
+    <TextView
+        android:id="@+id/label_receive_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/send_button"
+        android:layout_marginTop="60dp"
+        android:text="수신문자 "
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/receive_text"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/label_receive_text"
+        android:layout_margin="5dp"
+        android:background="#dedede" />
 
 </RelativeLayout>

@@ -1,7 +1,12 @@
 package kr.mindwing.camp_exam_smstest;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.telephony.SmsMessage;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,6 +20,22 @@ public class MainActivity extends ActionBarActivity {
 	private EditText etSendPhoneNumber;
 	private Button btSend;
 	private TextView tvReceiveText;
+
+	// Telephony.Sms.SMS_RECEIVED_ACTION 과 같은 값.
+	private static final String ACTION_SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+	private IntentFilter filter = new IntentFilter();
+	{
+		filter.addAction(ACTION_SMS_RECEIVED);
+	}
+
+	private BroadcastReceiver smsReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			SmsMessage[] smsData = SmsUtil.getSmsData(context, intent);
+
+			tvReceiveText.setText(SmsUtil.makeOneString(smsData[0]));
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +54,20 @@ public class MainActivity extends ActionBarActivity {
 				sendSms();
 			}
 		});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		registerReceiver(smsReceiver, filter);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		unregisterReceiver(smsReceiver);
 	}
 
 	protected void sendSms() {
